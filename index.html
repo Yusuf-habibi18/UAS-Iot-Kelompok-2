@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Monitoring Powermeter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        body { background: radial-gradient(circle at top right, #1e293b, #0f172a); min-height: 100vh; }
+    </style>
+</head>
+<body class="text-slate-100 p-4 md:p-8">
+
+    <div id="app" class="max-w-6xl mx-auto">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold">Dashboard Monitoring Powermeter</h1>
+            <p class="text-slate-400">Plant 1 – Jawa Timur | <span id="clock">--:--:--</span></p>
+        </header>
+
+        <div id="login-section" class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl max-w-lg mx-auto">
+            <h2 class="text-xl font-semibold mb-6">Konfigurasi Broker</h2>
+            <div class="grid gap-4">
+                <input type="text" id="broker" class="bg-slate-800 p-3 rounded-lg border border-slate-700 w-full" value="8bba1c43068748e98464080da69ed5ef.s1.eu.hivemq.cloud">
+                <input type="text" id="port" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="8884">
+                <input type="text" id="clientId" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="Powermeter">
+                <input type="text" id="username" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="developer">
+                <input type="password" id="password" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="Developer123456">
+                <input type="text" id="topic" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="industri/panel1">
+                
+                <button id="btn-connect" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg font-bold">Hubungkan</button>
+                <button id="btn-simulasi" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold text-sm">Masuk Mode Simulasi (Tanpa Broker)</button>
+            </div>
+        </div>
+
+        <div id="dashboard-section" class="hidden space-y-6">
+            <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div id="status-dot" class="w-4 h-4 rounded-full bg-red-500"></div>
+                    <span id="status-text">Disconnected</span>
+                </div>
+                <button onclick="location.reload()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg flex items-center gap-2"><i data-lucide="wifi-off"></i> Disconnect</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">Tegangan</p>
+                    <h3 class="text-2xl font-bold"><span id="v-val">0.00</span> V</h3>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">Arus</p>
+                    <h3 class="text-2xl font-bold"><span id="c-val">0.00</span> mA</h3>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">Daya</p>
+                    <h3 class="text-2xl font-bold"><span id="p-val">0.00</span> W</h3>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">Frekuensi</p>
+                    <h3 class="text-2xl font-bold"><span id="f-val">0.00</span> Hz</h3>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs text-slate-400">Energi</p>
+                    <h3 class="text-2xl font-bold"><span id="e-val">0.00</span> kWh</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+                <h3 class="font-bold mb-4">Log Data</h3>
+                <div class="overflow-x-auto"><table class="w-full text-sm"><tbody id="log-body"></tbody></table></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
