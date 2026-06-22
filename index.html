@@ -25,15 +25,15 @@
         <div id="login-section" class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl max-w-lg mx-auto">
             <h2 class="text-xl font-semibold mb-6">Konfigurasi Broker</h2>
             <div class="grid gap-4">
-                <input type="text" id="broker" class="bg-slate-800 p-3 rounded-lg border border-slate-700 w-full" value="8bba1c43068748e98464080da69ed5ef.s1.eu.hivemq.cloud">
-                <input type="text" id="port" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="8884">
-                <input type="text" id="clientId" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="Powermeter">
-                <input type="text" id="username" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="developer">
-                <input type="password" id="password" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="Developer123456">
-                <input type="text" id="topic" class="bg-slate-800 p-3 rounded-lg border border-slate-700" value="industri/panel1">
+                <input type="text" id="broker" placeholder="Broker URL" class="bg-slate-800 p-3 rounded-lg border border-slate-700 w-full text-white" value="8bba1c43068748e98464080da69ed5ef.s1.eu.hivemq.cloud">
+                <input type="text" id="port" placeholder="Port" class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-white" value="8884">
+                <input type="text" id="clientId" placeholder="Client ID" class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-white" value="Powermeter">
+                <input type="text" id="username" placeholder="Username" class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-white" value="developer">
+                <input type="password" id="password" placeholder="Password" class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-white" value="Developer123456">
+                <input type="text" id="topic" placeholder="Topic" class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-white" value="industri/panel1">
                 
-                <button id="btn-connect" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg font-bold">Hubungkan</button>
-                <button id="btn-simulasi" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold text-sm">Masuk Mode Simulasi (Tanpa Broker)</button>
+                <button id="btn-connect" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg font-bold text-white">Hubungkan</button>
+                <button id="btn-simulasi" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold text-sm text-white">Masuk Mode Simulasi (Tanpa Broker)</button>
             </div>
         </div>
 
@@ -75,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <script src="main.js"></script>
 </body>
 </html>
